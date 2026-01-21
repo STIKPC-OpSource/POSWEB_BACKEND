@@ -2,8 +2,14 @@ import { serve } from "bun";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { logger } from "hono/logger";
+import { auth } from "./lib/auth";
 
-const app = new Hono();
+const app = new Hono<{
+  Variables: {
+    user: typeof auth.$Infer.Session.user | null;
+    session: typeof auth.$Infer.Session.session | null;
+  };
+}>();
 const startTime = Date.now();
 
 app.use(logger());
@@ -14,7 +20,7 @@ app.use(
     origin: [
       "http://localhost:5173",
       "https://posweb.vercel.app",
-      ...(process.env.CLIENT_ORIGIN ? [process.env.CLIENT_ORIGIN] : []), // Secure: only allow defined origin, no wildcards
+      ...(process.env.CLIENT_ORIGIN ? [process.env.CLIENT_ORIGIN] : []),
     ],
     allowHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
     allowMethods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
@@ -23,6 +29,21 @@ app.use(
     credentials: true,
   })
 );
+
+// app.use("*", async (c, next) => {
+//   const session = await auth.api.getSession({ headers: c.req.raw.headers });
+
+//   if (!session) {
+//     c.set("user", null);
+//     c.set("session", null);
+//     await next();
+//     return;
+//   }
+
+//   c.set("user", session.user);
+//   c.set("session", session.session);
+//   await next();
+// });
 
 app.get("/", (c) => {
   return c.text("Hello World!");
@@ -51,9 +72,26 @@ app.get("/health", (c) => {
   });
 });
 
-// Error Handling
+app.get("/session", (c) => {
+  const session = c.get("session");
+  const user = c.get("user");
+
+  if (!user) {
+    return c.body(null, 401);
+  }
+
+  return c.json({
+    session,
+    user,
+  });
+});
+
+app.on(["POST", "GET"], "/api/auth/*", (c) => {
+  return auth.handler(c.req.raw);
+});
+
 app.onError((err, c) => {
-  console.error("🔥 Server Error:", err);
+  console.error("Server Error:", err);
   return c.json(
     {
       message: "Internal Server Error",
@@ -63,7 +101,6 @@ app.onError((err, c) => {
   );
 });
 
-// Start HTTP server with Hono ap
 const server = serve({
   fetch: app.fetch,
   port: process.env.PORT || 3888,
@@ -72,13 +109,11 @@ const server = serve({
 
 console.log(`Server running on http://${server.hostname}:${server.port}`);
 
-// Graceful shutdown handler
 const shutdown = () => {
   console.log("Shutting down...");
   server.stop();
   process.exit(0);
 };
 
-// Handle termination signals
-process.on("SIGINT", shutdown); // Ctrl+C
-process.on("SIGTERM", shutdown); // Docker stop / kill
+process.on("SIGINT", shutdown);
+process.on("SIGTERM", shutdown);
