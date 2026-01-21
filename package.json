@@ -2,7 +2,11 @@
   "name": "posweb-backend",
   "type": "module",
   "scripts": {
-    "dev": "bun run --hot src/index.ts"
+    "dev": "bun run --hot src/index.ts",
+    "build": "bun build src/index.ts --target bun --outdir dist",
+    "start": "bun run dist/index.js",
+    "lint": "bun x ultracite check",
+    "format": "bun x ultracite fix"
   },
   "dependencies": {
     "better-auth": "^1.4.13",
