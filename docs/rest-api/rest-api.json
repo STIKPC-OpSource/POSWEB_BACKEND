@@ -16,7 +16,9 @@
         "url": {
           "raw": "http://localhost:3888/",
           "protocol": "http",
-          "host": ["localhost:3888/"],
+          "host": [
+            "localhost:3888/"
+          ],
           "path": [],
           "query": [],
           "variable": []
@@ -35,12 +37,241 @@
         "url": {
           "raw": "http://localhost:3888/health",
           "protocol": "http",
-          "host": ["localhost:3888"],
-          "path": ["health"],
+          "host": [
+            "localhost:3888"
+          ],
+          "path": [
+            "health"
+          ],
           "query": [],
           "variable": []
         }
       }
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Sign In",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Origin",
+                "value": "http://localhost:5173",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "http://localhost:3888/api/auth/sign-in/email",
+              "protocol": "http",
+              "host": [
+                "localhost:3888"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "sign-in",
+                "email"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@posweb.local\",\n  \"password\": \"user123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Sign Out",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Origin",
+                "value": "http://localhost:5173",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "http://localhost:3888/api/auth/sign-out",
+              "protocol": "http",
+              "host": [
+                "localhost:3888"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "sign-out"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Sign In Admin",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Origin",
+                "value": "http://localhost:5173",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "http://localhost:3888/api/auth/sign-in/email",
+              "protocol": "http",
+              "host": [
+                "localhost:3888"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "sign-in",
+                "email"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@posweb.local\",\n  \"password\": \"admin123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Get Session 2",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Origin",
+                "value": "http://localhost:5173",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "http://localhost:3888/api/auth/get-session",
+              "protocol": "http",
+              "host": [
+                "localhost:3888"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "get-session"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Get Session 1",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Origin",
+                "value": "http://localhost:5173",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "http://localhost:3888/session",
+              "protocol": "http",
+              "host": [
+                "localhost:3888"
+              ],
+              "path": [
+                "session"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Sign In Cashier",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Origin",
+                "value": "http://localhost:5173",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "http://localhost:3888/api/auth/sign-in/email",
+              "protocol": "http",
+              "host": [
+                "localhost:3888"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "sign-in",
+                "email"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"cashier@posweb.local\",\n  \"password\": \"cashier123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
     }
   ],
   "variable": []

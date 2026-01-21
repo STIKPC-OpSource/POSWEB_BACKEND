@@ -1,0 +1,22 @@
+meta {
+  name: Sign In Cashier
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:3888/api/auth/sign-in/email
+  body: json
+  auth: none
+}
+
+headers {
+  Origin: http://localhost:5173
+}
+
+body:json {
+  {
+    "email": "cashier@posweb.local",
+    "password": "cashier123"
+  }
+}
