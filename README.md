@@ -28,9 +28,11 @@ Server akan jalan di `http://localhost:3888`
 ## Scripts
 
 ```bash
-bun dev              # Development server dengan hot reload
-bun x ultracite fix  # Auto-fix linting & formatting
-bun x ultracite check # Check linting issues
+bun dev       # Development server dengan hot reload
+bun build     # Build untuk production
+bun start     # Jalankan production build
+bun lint      # Check linting issues
+bun format    # Auto-fix linting & formatting
 ```
 
 ## API Endpoints
@@ -39,6 +41,13 @@ bun x ultracite check # Check linting issues
 | ------ | -------- | ------------ |
 | GET    | /        | Hello World  |
 | GET    | /health  | Health check |
+
+## API Documentation
+
+Dokumentasi API tersedia di folder `docs/rest-api/` dan mendukung:
+
+- **Postman** - Import file `rest-api.json`
+- **Bruno** - Buka folder `docs/rest-api/` langsung di Bruno
 
 ## Environment Variables
 
